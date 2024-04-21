@@ -19,6 +19,7 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate, CB
     override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
+        centralManagerDidUpdateState(centralManager)
     }
     
     func startScanning() -> Void {

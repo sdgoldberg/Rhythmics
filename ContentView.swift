@@ -48,6 +48,7 @@ struct ContentView: View {
                     } else {
                         // Handle stopping the session
                         bluetoothManager.centralManager.stopScan()
+                        print("Stopped Session")
                     }
                 }){
                     Text(isMonitoring ? "Stop Session" : "Start Session")
@@ -61,8 +62,10 @@ struct ContentView: View {
                         isAbnormalityTriggered.toggle()  // Toggle the abnormality state
                         if isAbnormalityTriggered {
                             bluetoothManager.sendToArduino(data: "1")  // Trigger haptic feedback
+                            print("1")
                         } else {
                             bluetoothManager.sendToArduino(data: "0")  // Stop haptic feedback
+                            print("0")
                         }
                     }) {
                         Text(isAbnormalityTriggered ? "Trigger Normality" : "Trigger Abnormality")
@@ -77,9 +80,6 @@ struct ContentView: View {
             .padding()
             .background(Color.blue.opacity(0.1)) // Calming background for the entire view
             .navigationBarTitle("Rhythmics", displayMode: .inline)
-        }
-        .onAppear(){
-            bluetoothManager.startScanning()
         }
     }
     // new code here
